@@ -16,7 +16,7 @@ Run the project by:
 10 exported configuration files (one per level) are submitted at the repository root.
 
 ## Resources
-- [YouTube series on network by NetworkChuck](https://www.youtube.com/watch?v=5WfiTHiU4x8&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF)
+- [YouTube series on network and subnetting by NetworkChuck](https://www.youtube.com/watch?v=5WfiTHiU4x8&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF)
 - Master OccupytheWeb. 2023. *Network basics for hackers: How networks work and how they break.* https://hackers-arise.com/getting-started/network-basics-for-hackers/
 
 ### TCP/IP addressing
@@ -25,6 +25,25 @@ An **Internet Protocol (IP) address** is a unique identifying series of numbers 
 An IP version 4 (IPv4) address consists of four octets (4 * 8 = 32 bits) in decimal notation separated by periods, e.g. `192.168.1.101`. This means that each number can be betwenn 0 and 255.
 
 The first three octets are the network portion of the IP address, which identifies a specific network. The last octet is the host portion, which identifies individual devices in that network. For the host portion, usually 0 is reserved for the network address and 255 is reserved for the broadcast address.
+
+There are five classes of IP address:
+- Class A: 1.0.0.0 - 126.255.255.255 (default subnet mask 255.0.0.0)
+- Class B: 128.0.0.0 - 191.255.0.0 (default subnet mask 255.255.0.0)
+- Class C: 192.0.0.0 - 223.255.255.0 (default subnet mask 255.255.255.0)
+- Class D: 224.0.0.0 - 239.255.255.255
+- Calss E: 240.0.0.0 - 255.255.255.255
+Class A - C are unicast (one-to-one transmission) addresses.
+Class A allows more hosts per network, while class C allows many networks but fewer hosts per network.
+Therefore, nowadays, we usually use classless networks by dividing a class A network into smaller subnetworks (subnet mask 255.255.255.0) so make use of more of the IP address range.
+Class D is for multicast (one-to-many or many-to-many transmission) networking and class E is for experimental purposes.
+127.0.0.0 are loop back addresses used for network testing.
+
+#### Public vs. private IP addresses
+**Public IP addresses** are IP addresses that can be reached on the internet and are unique.
+**Private IP addresses** are not unique, but not directly connected to the internet but has to be translated by the router to a public IP address using **Network Address Translation (NAT)**.
+- Class A: 10.0.0.0 - 10.255.255.255 (subnet mask 255.0.0.0)
+- Class B: 172.16.0.0 - 172.31.255.255 (subnet mask 255.255.0.0)
+- Class C: 192.168.0.0 - 192.168.255.255 (subnet mask 255.255.255.0)
 
 ### Subnet masks
 or Netmask
