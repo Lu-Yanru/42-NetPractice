@@ -20,6 +20,7 @@ Run the project by:
 - Master OccupytheWeb. 2023. *Network basics for hackers: How networks work and how they break.* https://hackers-arise.com/getting-started/network-basics-for-hackers/
 - [GeeksforGeeks Difference between router and switch](https://www.geeksforgeeks.org/computer-networks/difference-between-router-and-switch/)
 - [GeeksforGeeks Layers of OSI model](https://www.geeksforgeeks.org/computer-networks/open-systems-interconnection-model-osi/)
+- [GeeksforGeeks Routing tables in computer network](https://www.geeksforgeeks.org/computer-networks/routing-tables-in-computer-network/)
 
 AI is used to explain network related concepts in simple language with concrete examples.
 
@@ -80,6 +81,18 @@ This means the IP address ranges of the subnets are:
 #### CIDR notation
 The **Classless Inter-Domain Routing (CIDR) notation** represents how many bits are in the network mask as a slash and a decimal number. For example `192.168.1.0/24` means there are 24 bits in the network mask (`255.255.255.0`).
 
+| CIDR | Number of subnets | Number of hosts per subnet | Subnet mask | Increment | IP last octet range |
+|------|-------------------|-----------------|------------|------------------|----------------|
+| /24  | 1 | 256 | 255.255.255.0 | -- | 0-255 |
+| /25  | 2 | 128 | 255.255.255.128 | 128 | 0-127, 128-255 |
+| /26  | 4 | 64 | 255.255.255.192 | 64 | 0-63, 64-127, 128-181, 182-255 |
+| /27  | 8 | 32 | 255.255.255.224 | 32 | 0-31, 32-63, 64-95, 96-127, 128-159, 160-191, 192-223, 224-255 |
+| /28  | 16| 16 | 255.255.255.240 | 16 | 0-15, 16-31, 32-47, 48-63, 64-79, 80-95, 96-111, 112-127, 128-143, 144-159, 160-175, 176-191, 192-207, 208-223, 224-239, 240-255 |
+| /29 | 32 | 8 | 255.255.255.248 | 8 | 0-7, 8-15, 16-23, 24-31, 32-39, 40-47, 48-55, ... |
+| /30 | 64 | 4 | 255.255.255.252 | 4 | 0-3, 4-7, 8-11, 12-15, 16-19, ... | 
+| /31 | 128 | 2 | 255.255.255.254 | 2 | 0-1, 2-3, 4-5, ... |
+| /32 | 256 | 1 | 255.255.255.255 | 1 | -- |
+
 ### Default gateways
 A **default gateway** is a node in a network (typically a router) that serves as an access point to another network.
 Hosts need to go through the default gateway when when communicating with devices that are not in the same network.
@@ -93,6 +106,12 @@ A **network switch** is networking hardware that connects devices on a computer 
 
 A switch connects devices within the same local network and forwards traffic using MAC addresses.
 A router connects different networks together and forwards traddic using IP addresses.
+
+#### Routing table
+A **routing table** is a data table stored in a router or a network host that lists the routes to particular network destinations.
+The routing table this project contains two fields:
+- Network ID: The IP address of the final destination of the packet. The default route or `0.0.0.0/0` is a catch-all fallback when no match is found for a destination.
+- Next hop: The IP address to which the packet is forwarded to next.
 
 ### OSI layers
 The **Open System Interconnection (OSI) Model** is a conceptual framework created by the International Organization for Standardization (ISO) to describe how data is transmitted across a network using a structured seven-layer architecture.

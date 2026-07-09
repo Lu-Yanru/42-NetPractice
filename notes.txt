@@ -1,0 +1,5 @@
+https://github.com/semere-meb/netpractice/tree/main
+https://github.com/Overtekk/NetPractice
+https://github.com/lpaube/NetPractice
+https://github.com/caroldaniel/42sp-cursus-netpractice#routing-table
+https://github.com/viruskizz/42bangkok-netpractice
