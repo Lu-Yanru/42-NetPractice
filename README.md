@@ -18,6 +18,10 @@ Run the project by:
 ## Resources
 - [YouTube series on network and subnetting by NetworkChuck](https://www.youtube.com/watch?v=5WfiTHiU4x8&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF)
 - Master OccupytheWeb. 2023. *Network basics for hackers: How networks work and how they break.* https://hackers-arise.com/getting-started/network-basics-for-hackers/
+- [GeeksforGeeks Difference between router and switch](https://www.geeksforgeeks.org/computer-networks/difference-between-router-and-switch/)
+- [GeeksforGeeks Layers of OSI model](https://www.geeksforgeeks.org/computer-networks/open-systems-interconnection-model-osi/)
+
+AI is used to explain network related concepts in simple language with concrete examples.
 
 ### TCP/IP addressing
 **TCP/IP** (the internet protocol suite) are protocols that define the way to communicate in the internet and similar computer networks.
@@ -53,17 +57,49 @@ Class D is for multicast (one-to-many or many-to-many transmission) networking a
 ### Subnet masks
 The **subnet mask** has the same 32-bit structure as the IP address and is used to distinguish the network bits from the host bits.
 - The network bits (bits set to 1) are the part of the IP address that will not change, so it tells us which network we are on.
-- Each host bit (bits set to 0) can be used to create an IP address in that network and be assigned to a host.
-For example, `255.255.255.0` (or `11111111.11111111.11111111.00000000`) means the first three octets represents the network and are fixed, but the last octet can be anything btween 0 and 255, depending on what device it is assigned to.
+- Each host bit (bits set to 0) can be used to create an IP address in that network and be assigned to a host. The number of possible hosts in a network is 2^(number of 0 bits in the subnet mask).
+For example, `255.255.255.0` (or `11111111.11111111.11111111.00000000`) means the first three octets represents the network and are fixed, but the last octet can be anything between 0 and 255. There are 8 host bits in the subnet mask, so there can be max 256 (- 2 for network and broadcast addresses) hosts in the network.
 
-**Subnetting** is dividing a large network into smaller subnetworks (subnets) by changing the subnet mask to suit the need of how many hosts are needed in a network, so the IP addrees space can be used more efficiently.
+**Subnetting** is dividing a large network into smaller subnetworks (subnets) by changing the subnet mask to suit the need of how many hosts are needed in a network, so the IP addrees space can be used more efficiently. Steps to subnet:
+1. Calculate how many host bits you need to hack (change from host bits to network bits) using the following chart:
+
+|Number of bits to hack | 8 | 7| 6| 5 | 4| 3 | 2| 1|
+|----|---|--|--|---|--|---|--|--|
+|Number of networks|256 | 128 | 64 | 32 | 16 | 8 | 4 | 2|
+
+For example, if you need 4 subnets, you need to convert 2 bits from host bits to network bits, i.e. `11111111.11111111.11111111.00000000` -> `11111111.11111111.11111111.11000000`.
+
+2. Find the increment, i.e. the decimal number to divide the subnets, which is the last network bit. In the example, it is 64.
+
+This means the IP address ranges of the subnets are:
+- 192.168.1.0 - 192.168.1.63
+- 192.168.1.64 - 192.168.1.127
+- 192.168.1.128 - 192.168.1.191
+- 192.168.1.192 - 192.168.1.255
+
+#### CIDR notation
+The **Classless Inter-Domain Routing (CIDR) notation** represents how many bits are in the network mask as a slash and a decimal number. For example `192.168.1.0/24` means there are 24 bits in the network mask (`255.255.255.0`).
 
 ### Default gateways
-or default router or router
-assigns ip address in the network.
-also has an ip address itself.
-needs to go through when when communicating with devices that are not in the same network
+A **default gateway** is a node in a network (typically a router) that serves as an access point to another network.
+Hosts need to go through the default gateway when when communicating with devices that are not in the same network.
+It assigns IP addresses to hosts in the network,
+and also has an IP address itself.
 
 ### Routers and switches
+A **router** is a computer and networking device that forwards data packets between computer networks.
+
+A **network switch** is networking hardware that connects devices on a computer network by using packet switching to receive and forward data to the destination device.
+
+A switch connects devices within the same local network and forwards traffic using MAC addresses.
+A router connects different networks together and forwards traddic using IP addresses.
 
 ### OSI layers
+The **Open System Interconnection (OSI) Model** is a conceptual framework created by the International Organization for Standardization (ISO) to describe how data is transmitted across a network using a structured seven-layer architecture.
+- Layer 1: Physical layer: Establishes physical connection between devices and transmits raw bits over the medium.
+- Layer 2: Data link layer: Provides node-to-node delivery and error detection/correction.
+- Layer 3: Network layer: Handles logical addressing and routing of data between different networks.
+- Layer 4: Transport layer: Ensures end-to-end communication, segmentation, flow control, and error handling.
+- Layer 5: Session layer: Establishes, manages, and terminates communication sessions between applications.
+- Layer 6: Presentation layer: Translates, encrypts, and formats data for the application layer.
+- Layer 7: Application layer: Provides network services directly to end-user applications.
